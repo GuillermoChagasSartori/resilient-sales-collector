@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>StoreDeck - Sales (new layout)</title>
+</head>
+<body>
+  <!--
+    DEMO FIXTURE: this is the source that fails on purpose.
+
+    Same platform as stores 01, 02, 04 and 05, but this account was migrated to
+    StoreDeck's redesigned report: the table id changed from "sales-report" to
+    "report-grid" and the columns were renamed. This is the most common real
+    breakage in this kind of job - nobody tells you the page changed.
+
+    The run must still finish and produce the workbook for the other ten stores,
+    and must name this store, the error type and the reason.
+  -->
+  <div class="report">
+    <h1>Sales overview</h1>
+    <p class="meta">Location: Cedarline Mall &middot; Business date: 2026-09-10</p>
+    <table id="report-grid">
+      <thead>
+        <tr><th>Item code</th><th>Description</th><th>Dept</th><th>Units</th><th>Gross value</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>SKU-1001</td><td>Espresso Blend 1kg</td><td>Beverages</td><td>16</td><td>398.40</td></tr>
+        <tr><td>SKU-2001</td><td>Ceramic Mug</td><td>Homeware</td><td>19</td><td>285.00</td></tr>
+        <tr><td>SKU-3001</td><td>Cotton Tote Bag</td><td>Apparel</td><td>11</td><td>214.50</td></tr>
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>
