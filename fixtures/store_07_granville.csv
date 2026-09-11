@@ -1,0 +1,5 @@
+sku,product,category,quantity,unit_price,sale_date
+SKU-1001,Espresso Blend 1kg,beverages,14,24.90,2026-09-10
+SKU-2001,Ceramic Mug,homeware,9,15.00,2026-09-10
+SKU-3002,Wool Scarf,apparel,5,42.00,2026-09-10
+SKU-4002,Gel Pen Pack,stationery,29,4.60,2026-09-10
