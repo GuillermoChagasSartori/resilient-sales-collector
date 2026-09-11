@@ -1,0 +1,161 @@
+# ---------------------------------------------------------------------------
+# Store registry.
+#
+# This file is the whole configuration surface. Adding the twelfth store is a
+# new entry here - id, name, collector type, source, and its money rules. No
+# Python changes, no deploy of new code, nothing to test beyond the new entry.
+#
+# `collector:` must be one of the registered types:
+#   html_report   - a sales page on the shared web platform
+#   csv_export    - a CSV/spreadsheet export from a back office
+#   daily_total   - a source that only reports one revenue figure for the day
+#   email_report  - the day's numbers arriving as an email
+# ---------------------------------------------------------------------------
+
+run:
+  output_dir: output
+  excel_filename: daily_sales_consolidated.xlsx
+  report_filename: run_report.txt
+
+  # Applies to the fetch step of every store unless the store overrides it.
+  retry:
+    attempts: 3
+    backoff_seconds: 0.5
+    backoff_multiplier: 2.0
+
+stores:
+  # --- five stores on the same web platform, one collector ------------------
+  - id: ST-01
+    name: Aurora Center
+    collector: html_report
+    source: fixtures/store_01_aurora.html
+    commission_rate: 0.08
+    cost_rules:
+      default_ratio: 0.55
+      by_category:
+        beverages: 0.48
+        apparel: 0.42
+      by_sku:
+        SKU-1001: 0.40   # supplier deal on the house blend
+
+  - id: ST-02
+    name: Bellmont Square
+    collector: html_report
+    source: fixtures/store_02_bellmont.html
+    commission_rate: 0.075
+    cost_rules:
+      default_ratio: 0.55
+      by_category:
+        beverages: 0.48
+        apparel: 0.44
+
+  # Fails on purpose: this account was migrated to a redesigned report page.
+  # Left in the config deliberately - the point of the demo is that the run
+  # survives it. See fixtures/store_03_cedarline.html.
+  - id: ST-03
+    name: Cedarline Mall
+    collector: html_report
+    source: fixtures/store_03_cedarline.html
+    commission_rate: 0.09
+    cost_rules:
+      default_ratio: 0.56
+
+  - id: ST-04
+    name: Dunmore Park
+    collector: html_report
+    source: fixtures/store_04_dunmore.html
+    commission_rate: 0.07
+    cost_rules:
+      default_ratio: 0.54
+      by_category:
+        beverages: 0.47
+
+  - id: ST-05
+    name: Eastgate Plaza
+    collector: html_report
+    source: fixtures/store_05_eastgate.html
+    commission_rate: 0.085
+    cost_rules:
+      default_ratio: 0.55
+      by_category:
+        apparel: 0.43
+
+  # --- back-office exports --------------------------------------------------
+  # This store's export uses European number format and its own column names.
+  # Both are handled in config; the collector code is the same one ST-07 uses.
+  - id: ST-06
+    name: Foxridge Outlet
+    collector: csv_export
+    source: fixtures/store_06_foxridge.csv
+    commission_rate: 0.06
+    options:
+      delimiter: ";"
+      decimal_comma: true
+      date_format: "%d/%m/%Y"
+      columns:
+        sku: item_code
+        product: item_name
+        category: dept
+        quantity: units
+        unit_price: price
+        sale_date: day
+    cost_rules:
+      default_ratio: 0.58
+      by_category:
+        beverages: 0.50
+
+  # Demo only: this source drops its first connection, so the console shows
+  # the backoff working and the run report flags it as "recovered after retry".
+  - id: ST-07
+    name: Granville Row
+    collector: csv_export
+    source: fixtures/store_07_granville.csv
+    commission_rate: 0.065
+    simulate:
+      fetch_failures: 1
+    cost_rules:
+      default_ratio: 0.55
+      by_sku:
+        SKU-3002: 0.38
+
+  - id: ST-08
+    name: Harlow Point
+    collector: csv_export
+    source: fixtures/store_08_harlow.csv
+    commission_rate: 0.07
+    cost_rules:
+      default_ratio: 0.55
+      by_category:
+        homeware: 0.52
+
+  # --- terminals that only report a daily figure ----------------------------
+  - id: ST-09
+    name: Ironwood Kiosk
+    collector: daily_total
+    source: fixtures/store_09_ironwood.txt
+    commission_rate: 0.05
+    options:
+      category: kiosk
+    cost_rules:
+      default_ratio: 0.60
+
+  - id: ST-10
+    name: Juniper Stand
+    collector: daily_total
+    source: fixtures/store_10_juniper.txt
+    commission_rate: 0.05
+    options:
+      category: kiosk
+    cost_rules:
+      default_ratio: 0.60
+
+  # --- the store that emails its numbers in ---------------------------------
+  - id: ST-11
+    name: Kestrel Airport
+    collector: email_report
+    source: fixtures/store_11_kestrel.eml
+    commission_rate: 0.10
+    cost_rules:
+      default_ratio: 0.50
+      by_category:
+        beverages: 0.45
