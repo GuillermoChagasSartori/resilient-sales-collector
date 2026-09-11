@@ -1,0 +1,9 @@
+POS TERMINAL - END OF DAY EXPORT
+================================
+STORE: Ironwood Kiosk
+TERMINAL: K-09
+DATE: 2026-09-10
+TRANSACTIONS: 143
+TOTAL SALES: 4812.65
+================================
+This terminal does not export line items.

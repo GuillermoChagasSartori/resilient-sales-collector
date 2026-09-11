@@ -1,0 +1,9 @@
+POS TERMINAL - END OF DAY EXPORT
+================================
+STORE: Juniper Stand
+TERMINAL: K-10
+DATE: 2026-09-10
+TRANSACTIONS: 88
+TOTAL SALES: 2967.40
+================================
+This terminal does not export line items.
