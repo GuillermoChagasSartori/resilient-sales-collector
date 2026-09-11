@@ -1,0 +1,22 @@
+From: Store Manager <manager.kestrel@example-invalid.test>
+To: Daily Reports <reports@example-invalid.test>
+Subject: Daily numbers - Kestrel Airport - 2026-09-10
+Date: Fri, 11 Sep 2026 07:12:04 +0000
+Message-ID: <20260911071204.kestrel@example-invalid.test>
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+
+Morning,
+
+Yesterday's numbers below, same format as always.
+
+SKU-1001 | Espresso Blend 1kg | beverages | 21 | 26.50
+SKU-1002 | Cold Brew Bottle 330ml | beverages | 58 | 7.00
+SKU-3001 | Cotton Tote Bag | apparel | 17 | 21.00
+SKU-3002 | Wool Scarf | apparel | 3 | 45.00
+SKU-4002 | Gel Pen Pack | stationery | 26 | 5.10
+
+Prices here include the airport surcharge.
+
+Thanks,
+Kestrel Airport store
